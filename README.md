@@ -1,76 +1,46 @@
 # NxRefactor
 
-This project was generated using [Nx](https://nx.dev).
+This is a simple default [Nx](https://nx.dev) to test refactoring.
 
-<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/nx-logo.png" width="450"></p>
+Currently, refactoring is a pain, because the IDEs do not correctly
+ update the import statements/index.ts files.
 
-🔎 **Nx is a set of Extensible Dev Tools for Monorepos.**
+The screenshots below show what happens in IntelliJ IDEA 2020.1, 
+but also VsCode is not able to handle this case.
 
-## Adding capabilities to your workspace
+**Before refactoring** we have this situation:
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+![Before Refactoring](./images/before_refactoring.png "Before Refactoring")
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
+* a simple node-js app
+* lib-a
+* lib-b
 
-Below are some plugins which you can add to your workspace:
+The focus is on `file-to-move.ts` in `lib-a`:
+* the file exports a constant `TO_MOVE`
+* the barrel file `index.ts` in `lib-a` re-exports everything from `file-to-move.ts` so that 
+the constant `TO_MOVE`
+is also available outside of `lib-a`
+* the `main.ts` file of the node-app imports the `TO_MOVE` constant using the path 
+`@nx-refactor/lib-a` which is specified in `tsconfig.tx`     
 
-- [React](https://reactjs.org)
-  - `npm install --save-dev @nrwl/react`
-- Web (no framework frontends)
-  - `npm install --save-dev @nrwl/web`
-- [Angular](https://angular.io)
-  - `npm install --save-dev @nrwl/angular`
-- [Nest](https://nestjs.com)
-  - `npm install --save-dev @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `npm install --save-dev @nrwl/express`
-- [Node](https://nodejs.org)
-  - `npm install --save-dev @nrwl/node`
+Now we move `file-to-move.ts` from `lib-a` to `lib-b`.  
+Here is the **actual refactoring** in IntelliJ IDEA 2020.1:
 
-## Generate an application
+![Actual Refactoring](./images/actual_refactoring.png "Actual Refactoring")
 
-Run `nx g @nrwl/react:app my-app` to generate an application.
+Notes:
+* the barrel file `index.ts` in `lib-a` has been updated and now references `file-to-move.ts` 
+via a relative deep import into `lib-b``. This import is forbidden by nx - libraries must not use
+deep imports in to other libraries.
 
-> You can use any of the plugins above to generate applications as well.
+**Expected Refactoring**  
+This is the expected refactoring tha should happen instead:
 
-When using Nx, you can create multiple applications and libraries in the same workspace.
+![Expected Refactoring](./images/expected_refactoring.png "Expected Refactoring")
 
-## Generate a library
-
-Run `nx g @nrwl/react:lib my-lib` to generate a library.
-
-> You can also use any of the plugins above to generate libraries as well.
-
-Libraries are sharable across libraries and applications. They can be imported from `@nx-refactor/mylib`.
-
-## Development server
-
-Run `nx serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `nx g @nrwl/react:component my-component --project=my-app` to generate a new component.
-
-## Build
-
-Run `nx build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `nx test my-app` to execute the unit tests via [Jest](https://jestjs.io).
-
-Run `nx affected:test` to execute the unit tests affected by a change.
-
-## Running end-to-end tests
-
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
-
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
-
-## Understand your workspace
-
-Run `nx dep-graph` to see a diagram of the dependencies of your projects.
-
-## Further help
-
-Visit the [Nx Documentation](https://nx.dev) to learn more.
+Notes:
+1. the export of `file-to-move.ts` must be removed from barrel file `index.ts` in `lib-a`, since
+`file-to-move.ts` is not part of the library anymore
+2. a new export for `file-to-move.ts` must be added to the barrel file `index.ts` in `lib-b`
+3. all import statements - in this case only in `main.tx` must be updated to the new path: `@nx-refactor/lib-b`
