@@ -63,37 +63,6 @@
         }
       }
     },
-    "lib-c": {
-      "root": "libs/lib-c",
-      "sourceRoot": "libs/lib-c/src",
-      "projectType": "library",
-      "schematics": {},
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:lint",
-          "options": {
-            "linter": "eslint",
-            "config": "libs/lib-c/.eslintrc",
-            "tsConfig": [
-              "libs/lib-c/tsconfig.lib.json",
-              "libs/lib-c/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/lib-c/**"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/lib-c/jest.config.js",
-            "tsConfig": "libs/lib-c/tsconfig.spec.json",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
     "app": {
       "root": "apps/app",
       "sourceRoot": "apps/app/src",

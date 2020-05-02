@@ -17,8 +17,7 @@
     "baseUrl": ".",
     "paths": {
       "@nx-refactor/lib-a": ["libs/lib-a/src/index.ts"],
-      "@nx-refactor/lib-b": ["libs/lib-b/src/index.ts"],
-      "@nx-refactor/lib-c": ["libs/lib-c/src/index.ts"]
+      "@nx-refactor/lib-b": ["libs/lib-b/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
