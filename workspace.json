@@ -1,6 +1,91 @@
 {
   "version": 1,
-  "projects": {},
+  "projects": {
+    "lib-a": {
+      "root": "libs/lib-a",
+      "sourceRoot": "libs/lib-a/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "libs/lib-a/.eslintrc",
+            "tsConfig": [
+              "libs/lib-a/tsconfig.lib.json",
+              "libs/lib-a/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/lib-a/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/lib-a/jest.config.js",
+            "tsConfig": "libs/lib-a/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "lib-b": {
+      "root": "libs/lib-b",
+      "sourceRoot": "libs/lib-b/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "libs/lib-b/.eslintrc",
+            "tsConfig": [
+              "libs/lib-b/tsconfig.lib.json",
+              "libs/lib-b/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/lib-b/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/lib-b/jest.config.js",
+            "tsConfig": "libs/lib-b/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "lib-c": {
+      "root": "libs/lib-c",
+      "sourceRoot": "libs/lib-c/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "libs/lib-c/.eslintrc",
+            "tsConfig": [
+              "libs/lib-c/tsconfig.lib.json",
+              "libs/lib-c/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/lib-c/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/lib-c/jest.config.js",
+            "tsConfig": "libs/lib-c/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  },
   "cli": {
     "defaultCollection": "@nrwl/workspace"
   },

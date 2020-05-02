@@ -18,5 +18,15 @@
       }
     }
   },
-  "projects": {}
+  "projects": {
+    "lib-a": {
+      "tags": []
+    },
+    "lib-b": {
+      "tags": []
+    },
+    "lib-c": {
+      "tags": []
+    }
+  }
 }
