@@ -1,3 +1,3 @@
-import {LIB_A} from "@nx-refactor/lib-a";
+import {TO_MOVE} from "@nx-refactor/lib-a";
 
-console.log('constant value = '+LIB_A);
+console.log(`constants: ${TO_MOVE}`);
