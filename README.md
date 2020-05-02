@@ -46,7 +46,11 @@ Notes:
 3. all import statements - in this case only in `main.tx` must be updated to the new path: `@nx-refactor/lib-b`
 
 Additional info
-* after clongin the project run `yarn install`
+* after cloning the project run `yarn install`
 * to build the app run `nx build app`
 * to serve the app run `nx serve app`
 
+References:
+
+* [SO: "IDE - auto-update imports when moving files between libs/barrels"](
+https://stackoverflow.com/questions/61556751/ide-auto-update-imports-when-moving-files-between-libs-barrels)
