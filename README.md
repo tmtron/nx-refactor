@@ -44,3 +44,9 @@ Notes:
 `file-to-move.ts` is not part of the library anymore
 2. a new export for `file-to-move.ts` must be added to the barrel file `index.ts` in `lib-b`
 3. all import statements - in this case only in `main.tx` must be updated to the new path: `@nx-refactor/lib-b`
+
+Additional info
+* after clongin the project run `yarn install`
+* to build the app run `nx build app`
+* to serve the app run `nx serve app`
+
